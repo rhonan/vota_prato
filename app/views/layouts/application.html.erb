@@ -8,7 +8,11 @@
 </head>
 <body>
   <%= menu_principal %>
-<%= yield %>
+  <%= yield %>
+
+  <script type="text/javascript">
+    <%=yield :js%>
+  </script>
 
 </body>
 </html>

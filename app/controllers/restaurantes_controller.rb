@@ -1,7 +1,7 @@
 class RestaurantesController < ApplicationController
 
   def index
-    @restaurantes = Restaurante.order("nome")
+    @restaurantes = Restaurante.order("nome").paginate :page=> params['page'], :per_page=>3
   end
 
   def show
@@ -43,7 +43,7 @@ class RestaurantesController < ApplicationController
   private
 
   def restaurante_params
-    params.require(:restaurante).permit(:nome, :endereco, :especialidade)
+    params.require(:restaurante).permit(:nome, :endereco, :especialidade, :foto)
   end
 
 end

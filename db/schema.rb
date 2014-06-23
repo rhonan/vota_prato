@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620012907) do
+ActiveRecord::Schema.define(version: 20140622220647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20140620012907) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comentarios", force: true do |t|
+    t.text     "conteudo"
+    t.integer  "comentavel_id"
+    t.string   "comentavel_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comentarios", ["comentavel_id"], name: "index_comentarios_on_comentavel_id", using: :btree
+  add_index "comentarios", ["comentavel_type"], name: "index_comentarios_on_comentavel_type", using: :btree
 
   create_table "pratos", force: true do |t|
     t.string   "nome",       limit: 80
@@ -54,11 +65,15 @@ ActiveRecord::Schema.define(version: 20140620012907) do
   end
 
   create_table "restaurantes", force: true do |t|
-    t.string   "nome",          limit: 80
+    t.string   "nome",              limit: 80
     t.string   "endereco"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "especialidade", limit: 40
+    t.string   "especialidade",     limit: 40
+    t.string   "foto_file_name"
+    t.string   "foto_content_type"
+    t.integer  "foto_file_size"
+    t.datetime "foto_updated_at"
   end
 
 end
